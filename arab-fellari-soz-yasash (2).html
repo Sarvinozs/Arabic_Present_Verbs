@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arab fe'llari: so'z yasash</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F3FF;--card:#fff;--ink:#231A4A;--mute:#6B6390;--line:#E4DEFA;--c1:#F0435F;--c2:#0A9E8E;--c3:#7B5CFA;--c4:#D98A00;--ce:#D6338A;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150F2B;--card:#221A42;--ink:#F1EDFF;--mute:#A79FCB;--line:#3A3060;--c1:#FF6F86;--c2:#2CD3C0;--c3:#A48DFF;--c4:#FFB930;--ce:#FF7EBB}}
+:root[data-theme="dark"]{--bg:#150F2B;--card:#221A42;--ink:#F1EDFF;--mute:#A79FCB;--line:#3A3060;--c1:#FF6F86;--c2:#2CD3C0;--c3:#A48DFF;--c4:#FFB930;--ce:#FF7EBB}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-weight:500;line-height:1.5}
+.ar{font-family:'Amiri','Noto Naskh Arabic','Scheherazade New','Geeza Pro','Traditional Arabic','Segoe UI',Tahoma,'Arial Unicode MS',serif;line-height:1.9}
+.ar em{font-style:normal;font-weight:inherit}
+main{max-width:760px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:1.6rem;margin:0 0 4px;font-weight:800}
+.sub{color:var(--mute);margin:0 0 14px}
+.tabs,.chips{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tab{flex:1;padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--c3);border-color:var(--c3);color:#fff}
+button:focus-visible{outline:3px solid var(--c4);outline-offset:2px}
+.chip{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.chip .ar{font-size:1.4rem;line-height:1.4}
+.chip.on{border-color:var(--c3);background:color-mix(in srgb,var(--c3) 15%,var(--card))}
+.bench{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:18px;text-align:center}
+.word{font-size:3.6rem;line-height:1.7;min-height:100px}
+.pre{color:var(--c1)}
+.pre.g1{color:var(--c1)}.pre.g2{color:var(--c2)}.pre.g3{color:var(--c3)}.pre.g4{color:var(--c4)}
+.end{color:var(--ce)}
+.ph{color:var(--mute);border-bottom:4px dashed var(--mute)}
+.new{animation:flash 1.2s}
+@keyframes flash{from{background:color-mix(in srgb,var(--c4) 45%,transparent)}to{background:transparent}}
+.pron{display:inline-block;background:var(--c3);color:#fff;border-radius:999px;padding:2px 16px;font-weight:800;font-size:1.1rem}
+.steps{text-align:left;margin:14px auto 0;max-width:520px;display:grid;gap:6px}
+.steps p{margin:0;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--c3) 9%,var(--card));opacity:.25;transition:opacity .4s}
+.steps p.on{opacity:1}
+.steps b.p{color:var(--c1)}.steps b.e{color:var(--ce)}
+.legend{font-size:.9rem;color:var(--mute);margin:12px 2px}
+.legend i{font-style:normal;font-weight:800}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:520px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{--c:var(--c1);position:relative;padding:8px 6px;border-radius:16px;border:3px solid var(--c);background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;line-height:1.2}
+.tile .ar{display:block;font-size:1.6rem;line-height:1.5;color:var(--c)}
+.tile.on{background:var(--c);color:#fff}
+.tile.on .ar{color:#fff}
+.tile.sfx::after{content:"";position:absolute;top:6px;left:6px;width:10px;height:10px;border-radius:50%;background:var(--ce)}
+.replay{margin-top:12px;padding:8px 20px;border-radius:999px;border:2px solid var(--c3);background:transparent;color:var(--c3);font:inherit;font-weight:800;cursor:pointer}
+.hud{display:flex;justify-content:space-between;font-weight:800;margin:10px 0 8px}
+.track{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:14px}
+#bar{height:100%;width:0;background:linear-gradient(90deg,var(--c1),var(--c4),var(--c2),var(--c3));transition:width .4s}
+.q{color:var(--mute);font-weight:700}
+.sent{font-size:1.7rem;font-weight:800}
+.small{font-size:.85rem;color:var(--mute)}
+.row{margin-top:10px;text-align:left;font-weight:800}
+.opts{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;justify-content:center}
+.opt{--c:var(--c3);min-width:64px;padding:6px 12px;border-radius:14px;border:3px solid var(--c);background:var(--card);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.opt.ar{font-size:2rem;line-height:1.5;color:var(--c)}
+.opt.on{background:var(--c);color:#fff}
+.opt:disabled{cursor:default;opacity:.7}
+.go{margin-top:12px;padding:12px 28px;border-radius:999px;border:0;background:var(--c3);color:#fff;font:inherit;font-weight:800;font-size:1.05rem;cursor:pointer}
+.go:disabled{opacity:.35;cursor:default}
+.fb{margin-top:12px;font-weight:700;text-align:left}
+.stars{font-size:2.6rem}
+.spk{margin:8px 0 0 8px;padding:4px 16px;border-radius:999px;border:2px solid var(--c2);background:transparent;color:var(--c2);font:inherit;font-weight:800;cursor:pointer}
+.vn{font-size:.85rem;color:var(--mute);margin-top:6px;min-height:1.2em}
+.hide{display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<h1>Arab fe'llari: so'z yasash</h1>
+<p class="sub">Avval so'zning o'zi. Keyin boshiga va oxiriga harf qo'shib, kim ekanini ko'rsatamiz.</p>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" id="t1" aria-selected="true" onclick="tab(1)">O'rganish</button>
+<button class="tab" role="tab" id="t2" aria-selected="false" onclick="tab(2)">O'yin</button>
+</div>
+
+<section id="v1">
+<div class="chips" id="chips"></div>
+<div class="bench" id="bench1"></div>
+<p class="legend"><i style="color:var(--c1)">Rangli harf</i> boshiga qo'shiladi. <i style="color:var(--ce)">Pushti qism</i> oxiriga qo'shiladi (pushti nuqtali olmoshlarda). Kim ekanini tanlang:</p>
+<div class="tiles" id="tiles"></div>
+</section>
+
+<section id="v2" class="hide">
+<div class="chips">
+<button class="chip on" id="m0" onclick="setMode(0)">Oson: faqat boshiga harf (5 olmosh)</button>
+<button class="chip" id="m1" onclick="setMode(1)">To'liq: boshi va oxiri (13 olmosh)</button>
+</div>
+<div class="hud"><span id="qn"></span><span id="sc"></span><span id="st"></span></div>
+<div class="track"><div id="bar"></div></div>
+<div class="bench" id="game"></div>
+</section>
+</main>
+
+<script>
+const P=[
+{k:"أَ",l:"أ",pre:"a",g:"g1"},{k:"نَ",l:"ن",pre:"na",g:"g2"},{k:"يَ",l:"ي",pre:"ya",g:"g3"},{k:"تَ",l:"ت",pre:"ta",g:"g4"}];
+const E=[
+{a:"ُ",t:"ـُ",l:"u",n:"birlik, oxiri -u"},
+{a:"ِينَ",t:"ـِينَ",l:"iina",n:"ayol «Sen», oxiri -iina"},
+{a:"َانِ",t:"ـَانِ",l:"aani",n:"ikkita, oxiri -aani"},
+{a:"ُونَ",t:"ـُونَ",l:"uuna",n:"erkaklar ko'pligi, oxiri -uuna"},
+{a:"ْنَ",t:"ـْنَ",l:"na",n:"ayollar ko'pligi, oxiri -na"}];
+const V=[
+{ar:"كتب",uz:"yozmoq",st:"yoz",core:"كْتُب",lat:"ktub"},
+{ar:"شرب",uz:"ichmoq",st:"ich",core:"شْرَب",lat:"shrab"},
+{ar:"فتح",uz:"ochmoq",st:"och",core:"فْتَح",lat:"ftah"},
+{ar:"دخل",uz:"kirmoq",st:"kir",core:"دْخُل",lat:"dkhul"}];
+const T=[
+{ar:"أنا",uz:"Men",s:"Men",u:"aman",pi:0,ei:0},
+{ar:"نحن",uz:"Biz",s:"Biz",u:"amiz",pi:1,ei:0},
+{ar:"هو",uz:"U (erkak)",s:"U",u:"adi",pi:2,ei:0},
+{ar:"هي",uz:"U (ayol)",s:"U",u:"adi",pi:3,ei:0},
+{ar:"أنتَ",uz:"Sen (erkak)",s:"Sen",u:"asan",pi:3,ei:0},
+{ar:"أنتِ",uz:"Sen (ayol)",s:"Sen",u:"asan",pi:3,ei:1},
+{ar:"هما",uz:"Ikkalasi (erkak)",s:"Ikkalasi",u:"adi",pi:2,ei:2},
+{ar:"هما",uz:"Ikkalasi (ayol)",s:"Ikkalasi",u:"adi",pi:3,ei:2},
+{ar:"أنتما",uz:"Ikkovingiz",s:"Ikkovingiz",u:"asiz",pi:3,ei:2},
+{ar:"هم",uz:"Ular (erkaklar)",s:"Ular",u:"adi",pi:2,ei:3},
+{ar:"هن",uz:"Ular (ayollar)",s:"Ular",u:"adi",pi:2,ei:4},
+{ar:"أنتم",uz:"Sizlar (erkaklar)",s:"Sizlar",u:"asizlar",pi:3,ei:3},
+{ar:"أنتن",uz:"Sizlar (ayollar)",s:"Sizlar",u:"asizlar",pi:3,ei:4}];
+const $=s=>document.querySelector(s);
+const sh=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const sent=(t,v)=>`${t.s} ${v.st}${t.u}`;
+/* pre/end: index or null; fresh: which part just appeared */
+const word=(v,pi,ei,fresh)=>`<span class="ar" dir="rtl" lang="ar">`+
+ (pi==null?`<em class="ph">؟</em>`:`<em class="pre ${P[pi].g} ${fresh=='p'?'new':''}">${P[pi].k}</em>`)+
+ `${v.core}`+
+ (ei==null?`<em class="ph">؟</em>`:`<em class="end ${fresh=='e'?'new':''}">${E[ei].a}</em>`)+`</span>`;
+const lat=(v,pi,ei)=>(pi==null?"":P[pi].pre)+v.lat+(ei==null?"":E[ei].l);
+
+let voices=[];
+function loadV(){voices=window.speechSynthesis?speechSynthesis.getVoices():[]}
+if(window.speechSynthesis){loadV();speechSynthesis.onvoiceschanged=loadV}
+function say(vi,pi,ei,id){
+  const n=document.getElementById(id);n.textContent="";
+  if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){n.textContent="Bu brauzerda ovoz yo'q. Yuqoridagi yozma o'qilishidan foydalaning.";return}
+  const u=new SpeechSynthesisUtterance(P[pi].k+V[vi].core+E[ei].a);
+  u.lang="ar-SA";u.rate=.8;
+  const av=voices.find(x=>/^ar/i.test(x.lang));if(av)u.voice=av;
+  const t=setTimeout(()=>{n.textContent="Bu qurilmada arabcha ovoz topilmadi. Yuqoridagi yozma o'qilishidan foydalaning."},1800);
+  u.onstart=()=>{clearTimeout(t);n.textContent=""};
+  u.onerror=()=>{clearTimeout(t);n.textContent="Ovoz ishlamadi. Yuqoridagi yozma o'qilishidan foydalaning."};
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+function tab(n){
+  $("#v1").classList.toggle("hide",n!=1);$("#v2").classList.toggle("hide",n!=2);
+  $("#t1").setAttribute("aria-selected",n==1);$("#t2").setAttribute("aria-selected",n==2);
+  if(n==2)start();
+}
+
+/* ---------- LEARN ---------- */
+let LS={v:0,p:2,st:0},tm=[];
+function chips(){
+  $("#chips").innerHTML=V.map((v,i)=>`<button class="chip ${i==LS.v?'on':''}" onclick="LS.v=${i};chips();run(LS.p)"><span class="ar" dir="rtl" lang="ar">${v.ar}</span>${v.uz}</button>`).join("");
+}
+function tiles(){
+  $("#tiles").innerHTML=T.map((t,i)=>`<button class="tile ${t.ei?'sfx':''} ${i==LS.p?'on':''}" style="--c:var(--c${t.pi+1})" onclick="run(${i})"><span class="ar" dir="rtl" lang="ar">${t.ar}</span>${t.uz}</button>`).join("");
+}
+function bench(){
+  const v=V[LS.v],t=T[LS.p],st=LS.st,e=E[t.ei];
+  const pi=st>=1?t.pi:null, ei=st>=2?t.ei:null;
+  const w=st==0?`<span class="ar" dir="rtl" lang="ar">${v.core}</span>`:st==1?word(v,pi,undefined,'p').replace(/<em class="ph">؟<\/em><\/span>$/,"</span>"):word(v,pi,ei,'e');
+  const L=[
+   `1. So'zning o'zi: <b>${v.core}</b> (${v.lat}), «${v.st}-» ma'nosida.`,
+   `2. Boshiga <b class="p">${P[t.pi].k}</b> (${P[t.pi].pre}-) qo'shamiz: «${t.uz}» uchun.`,
+   `3. Oxiriga <b class="e">${e.t}</b> (-${e.l}) qo'shamiz: ${e.n}.`];
+  $("#bench1").innerHTML=`<div class="q">${t.ar} ${t.uz}: ${sent(t,v)}</div><div class="word">${w}</div>
+<span class="pron">${lat(v,st>=1?t.pi:null,st>=2?t.ei:null)}</span><button class="spk" onclick="say(${LS.v},${t.pi},${t.ei},'vn1')">🔊 Tinglash</button><div class="vn" id="vn1"></div>
+<div class="steps">${L.map((x,i)=>`<p class="${i<=st?'on':''}">${x}</p>`).join("")}</div>
+<button class="replay" onclick="run(LS.p)">Qayta ko'rsat</button>`;
+}
+function run(i){
+  tm.forEach(clearTimeout);LS.p=i;LS.st=0;tiles();bench();
+  tm=[setTimeout(()=>{LS.st=1;bench()},800),setTimeout(()=>{LS.st=2;bench()},1700)];
+}
+
+/* ---------- GAME ---------- */
+let G,mode=0;
+function setMode(m){mode=m;$("#m0").classList.toggle("on",m==0);$("#m1").classList.toggle("on",m==1);start()}
+function start(){
+  const pool=mode==0?T.filter(t=>!t.ei):T;
+  G={i:0,s:0,st:0,pre:null,end:null,done:false,q:Array.from({length:10},()=>({v:V[Math.random()*4|0],t:pool[Math.random()*pool.length|0]}))};
+  ask();
+}
+function hud(){
+  $("#qn").textContent=Math.min(G.i+1,10)+" / 10";$("#sc").textContent="⭐ "+G.s;$("#st").textContent="🔥 "+G.st;
+  $("#bar").style.width=G.i*10+"%";
+}
+function gbench(){
+  const q=G.q[G.i];
+  $("#stage").innerHTML=`<div class="word">${word(q.v,G.pre,mode==0?0:G.end)}</div><span class="pron">${lat(q.v,G.pre,mode==0?0:G.end)}</span>`;
+  document.querySelectorAll("[data-p]").forEach(b=>b.classList.toggle("on",b.dataset.p==G.pre));
+  document.querySelectorAll("[data-e]").forEach(b=>b.classList.toggle("on",b.dataset.e==G.end));
+  $("#chk").disabled=G.pre==null||(mode==1&&G.end==null);
+}
+function ask(){
+  if(G.i>=10)return end();
+  hud();G.done=false;G.pre=null;G.end=null;
+  const q=G.q[G.i],t=q.t;
+  $("#game").innerHTML=`<div class="q">Arabcha so'zni yig'ing</div>
+<div class="sent">${sent(t,q.v)}</div>
+<div class="small"><span class="ar" dir="rtl" lang="ar" style="font-size:1.3rem">${t.ar}</span> ${t.uz}</div>
+<div id="stage"></div>
+<div class="row">Boshiga qaysi harf?<div class="opts">${P.map((p,k)=>`<button class="opt ar" data-p="${k}" style="--c:var(--c${k+1})" onclick="setP(${k})">${p.l}</button>`).join("")}</div></div>
+${mode==1?`<div class="row">Oxiriga nima?<div class="opts">${E.map((e,k)=>`<button class="opt ar" data-e="${k}" style="--c:var(--ce)" onclick="setE(${k})">${e.t}</button>`).join("")}</div></div>`:""}
+<div class="fb" id="fb"></div>
+<button class="go" id="chk" onclick="check()">Tekshirish</button>
+<button class="go hide" id="next" onclick="G.i++;ask()">${G.i==9?"Natijani ko'rish":"Keyingisi"}</button>`;
+  gbench();
+}
+function setP(k){if(!G.done){G.pre=k;gbench()}}
+function setE(k){if(!G.done){G.end=k;gbench()}}
+function check(){
+  const q=G.q[G.i],t=q.t;G.done=true;
+  const okP=G.pre==t.pi,okE=mode==0||G.end==t.ei,good=okP&&okE;
+  if(good){G.s++;G.st++}else G.st=0;
+  hud();
+  document.querySelectorAll(".opt").forEach(b=>b.disabled=true);
+  $("#stage").innerHTML=`<div class="word">${word(q.v,t.pi,t.ei)}</div><span class="pron">${lat(q.v,t.pi,t.ei)}</span><button class="spk" onclick="say(${V.indexOf(q.v)},${t.pi},${t.ei},'vn2')">🔊 Tinglash</button><div class="vn" id="vn2"></div>`;
+  let m=good?`✅ To'g'ri! Boshiga <b>${P[t.pi].l}</b>${mode==1?`, oxiriga <b>${E[t.ei].t}</b> (${E[t.ei].n})`:""}.`:"❌ Deyarli.";
+  if(!okP)m+=` Boshiga <b>${P[t.pi].l}</b> ( ${P[t.pi].pre}- ) kerak edi, siz <b>${P[G.pre].l}</b> tanladingiz.`;
+  if(!okE)m+=` Oxiriga <b>${E[t.ei].t}</b> kerak: ${E[t.ei].n}.`;
+  $("#fb").innerHTML=m;
+  $("#chk").classList.add("hide");$("#next").classList.remove("hide");
+}
+function end(){
+  $("#bar").style.width="100%";
+  const n=G.s>=9?3:G.s>=6?2:1;
+  $("#game").innerHTML=`<div class="stars">${"⭐".repeat(n)}</div><div class="sent">${G.s} / 10</div>
+<p class="q">${G.s>=9?"Ajoyib! Siz so'z yasashni yaxshi bilasiz.":G.s>=6?"Yaxshi! Yana bir marta o'ynab, 10 ga chiqing.":"Boshlanishi yaxshi. O'rganish bo'limini ko'rib, qayta urinib ko'ring."}</p>
+<button class="go" onclick="start()">Qayta o'ynash</button> <button class="go" style="background:var(--c2)" onclick="tab(1)">O'rganish</button>`;
+}
+chips();run(2);
+</script>
+</body>
+</html>
